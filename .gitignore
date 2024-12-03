@@ -1,0 +1,11 @@
+venv/
+
+__pycache__/
+docx-template/
+etc/
+Include/
+Lib/
+Scripts/
+share/
+*.pyc
+*.cfg

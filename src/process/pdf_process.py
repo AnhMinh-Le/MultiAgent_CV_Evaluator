@@ -1,6 +1,10 @@
-from langchain_community.document_loaders import PyMuPDFLoader
+'''
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+'''
+from langchain_community.document_loaders import PyMuPDFLoader
 import re
 import string
 
@@ -28,6 +32,9 @@ def clean_text(text):
     # Convert text to lowercase
     text = text.lower()
 
+    '''
+
+
     # Remove stopwords (optional)
     stop_words = set(stopwords.words('english'))
     text = " ".join(word for word in text.split() if word not in stop_words)
@@ -35,6 +42,8 @@ def clean_text(text):
     # Stemming (optional)
     ps = PorterStemmer()
     text = " ".join(ps.stem(word) for word in text.split())
+
+    '''
 
     return text
 

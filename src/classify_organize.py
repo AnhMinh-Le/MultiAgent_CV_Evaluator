@@ -17,26 +17,17 @@ def classify_topic(cv_text):
     "Mechanical Engineer", "Network Security Engineer", "Operations Manager", "PMO", "Public Relations", 
     "Python Developer", "React Developer", "Sales", "SAP Developer", "SQL Developer", "Testing", "Web Designing"
 ]
-    """Xác định topic dựa trên nội dung CV."""
     for category in categories:
         if category.lower() in cv_text.lower():
             return category
-    return "Other"  # Nếu không khớp với category nào
-
+    return "Other"  
 
 def organize_cvs(input_folder, output_folder):
-    """
-    Phân loại các CV trong folder đầu vào theo category 
-    và sắp xếp chúng vào các folder tương ứng trong folder đầu ra.
-    """
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
-
-    # Duyệt qua từng file trong folder đầu vào
     for filename in os.listdir(input_folder):
         file_path = os.path.join(input_folder, filename)
 
-        # Trích xuất nội dung CV
         if filename.endswith(".pdf"):
             cv_text = extract_text_from_pdf(file_path)
         elif filename.endswith(".docx"):
@@ -45,15 +36,12 @@ def organize_cvs(input_folder, output_folder):
             print(f"Skipping unsupported file: {filename}")
             continue
 
-        # Phân loại topic
         topic = classify_topic(cv_text)
 
-        # Tạo folder theo topic nếu chưa có
         topic_folder = os.path.join(output_folder, topic)
         if not os.path.exists(topic_folder):
             os.makedirs(topic_folder)
 
-        # Copy file vào folder tương ứng
         shutil.copy(file_path, os.path.join(topic_folder, filename))
 
     print(f"All CVs have been organized into: {output_folder}")
